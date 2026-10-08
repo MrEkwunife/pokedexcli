@@ -3,6 +3,7 @@ package pokeapi
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -12,6 +13,16 @@ func (c *Client) ListLocationAreas(pageURL *string) (LocationAreasResp, error) {
 	if pageURL != nil {
 		fullUrl = *pageURL
 	}
+
+	if dat, ok := c.cache.Get(fullUrl); ok {
+		fmt.Println("cache hit!")
+		locationAreaResp := LocationAreasResp{}
+		if err := json.Unmarshal(dat, &locationAreaResp); err != nil {
+			return LocationAreasResp{}, err
+		}
+		return locationAreaResp, nil
+	}
+	fmt.Println("cache miss!")
 
 	req, err := http.NewRequest("GET", fullUrl, nil)
 	if err != nil {
@@ -28,11 +39,16 @@ func (c *Client) ListLocationAreas(pageURL *string) (LocationAreasResp, error) {
 		return LocationAreasResp{}, fmt.Errorf("bad status code: %v", resp.StatusCode)
 	}
 
-	var locationArea LocationAreasResp
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&locationArea); err != nil {
+	dat, err := io.ReadAll(resp.Body)
+	if err != nil {
 		return LocationAreasResp{}, err
 	}
 
+	locationArea := LocationAreasResp{}
+	if err := json.Unmarshal(dat, &locationArea); err != nil {
+		return LocationAreasResp{}, err
+	}
+
+	c.cache.Add(fullUrl, dat)
 	return locationArea, nil
 }

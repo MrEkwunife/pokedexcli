@@ -1,11 +1,15 @@
 package main
 
-import "github.com/MrEkwunife/pokedexcli/internal/pokeapi"
+import (
+	"time"
+
+	"github.com/MrEkwunife/pokedexcli/internal/pokeapi"
+)
 
 func main() {
 	cfg := &config{
 		commands:      getCommands(),
-		pokeApiClient: pokeapi.NewClient(),
+		pokeApiClient: pokeapi.NewClient(time.Hour),
 	}
 	startRepl(cfg)
 }
