@@ -5,10 +5,15 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/MrEkwunife/pokedexcli/internal/pokeapi"
 )
 
 type config struct {
-	commands map[string]cliCommand
+	commands            map[string]cliCommand
+	pokeApiClient       pokeapi.Client
+	nextLocationAreaURL *string
+	prevLocationAreaURL *string
 }
 
 func startRepl(cfg *config) {
@@ -53,6 +58,11 @@ func getCommands() map[string]cliCommand {
 			name:        "help",
 			description: "Displays a help message",
 			callback:    commandHelp,
+		},
+		"map": {
+			name:        "map",
+			description: "List location areas",
+			callback:    commandMap,
 		},
 		"exit": {
 			name:        "exit",

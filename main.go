@@ -1,8 +1,11 @@
 package main
 
+import "github.com/MrEkwunife/pokedexcli/internal/pokeapi"
+
 func main() {
 	cfg := &config{
-		commands: getCommands(),
+		commands:      getCommands(),
+		pokeApiClient: pokeapi.NewClient(),
 	}
 	startRepl(cfg)
 }
