@@ -4,6 +4,12 @@ A lightweight, interactive command-line Pokédex REPL built with Go. Perfect for
 
 ---
 
+## Motivation
+
+This project was built as a hands-on way to practice real-world Go skills: building an interactive REPL, consuming a RESTful API, parsing JSON into structs, managing state, and implementing an in-memory cache with automatic expiry. It's also just a fun way to explore the Pokémon world from the terminal.
+
+---
+
 ## Features
 
 - **Interactive REPL**: A responsive command-line interface.
@@ -15,35 +21,32 @@ A lightweight, interactive command-line Pokédex REPL built with Go. Perfect for
 
 ---
 
-## Installation
+## Quick Start
 
-### Prerequisites
-- [Go](https://go.dev/dl/) (version 1.22 or newer recommended)
+**Prerequisite:** [Go](https://go.dev/dl/) (version 1.22 or newer recommended)
 
-### Option 1: Direct Install via Go
 ```bash
 go install github.com/MrEkwunife/pokedexcli@latest
+pokedexcli
 ```
+
 Make sure your Go binary path (typically `~/go/bin`) is included in your system's `PATH`.
 
-### Option 2: Build from Source
+To build from source instead:
+
 ```bash
 git clone https://github.com/MrEkwunife/pokedexcli.git
 cd pokedexcli
 go build -o pokedexcli
+./pokedexcli
 ```
 
 ---
 
-## How to Play & Explore
+## Usage
 
-Launch the application by running:
-```bash
-pokedexcli
-```
-*(or `./pokedexcli` if you built from source)*
+Launch the application by running `pokedexcli` (or `./pokedexcli` if you built from source). You will enter the interactive REPL prompt:
 
-You will enter the interactive REPL prompt:
 ```text
 Pokedex >
 ```
@@ -51,38 +54,36 @@ Pokedex >
 ### Quick Walkthrough
 
 1. **Scout Locations**:
-   ```text
+```text
    Pokedex > map
-   ```
+```
    Lists 20 location areas. Running `map` again lists the next 20, while `mapb` pages backward.
 
 2. **Explore an Area**:
-   ```text
+```text
    Pokedex > explore canalave-city-area
-   ```
+```
    Reveals all wild Pokémon residing in that area.
 
 3. **Catch a Pokémon**:
-   ```text
+```text
    Pokedex > catch tentacool
-   ```
+```
    Toss a Pokéball! You may need a few tries depending on the Pokémon's level and base experience.
 
 4. **Inspect Your Catch**:
-   ```text
+```text
    Pokedex > inspect tentacool
-   ```
+```
    Shows detailed stats (HP, Attack, Defense, Speed, etc.), height, weight, and types of any caught Pokémon.
 
 5. **View Your Pokédex**:
-   ```text
+```text
    Pokedex > pokedex
-   ```
+```
    Lists all Pokémon you have successfully caught.
 
----
-
-## Available Commands
+### Available Commands
 
 | Command | Arguments | Description |
 |---|---|---|
@@ -94,6 +95,30 @@ Pokedex >
 | `inspect` | `<pokemon_name>` | Displays details and stats of a caught Pokémon |
 | `pokedex` | — | Displays all Pokémon currently in your Pokédex |
 | `exit` | — | Exits the Pokédex REPL |
+
+---
+
+## Contributing
+
+Contributions are welcome! To get started:
+
+1. Fork the repository on GitHub.
+2. Clone your fork:
+```bash
+   git clone https://github.com/<your-username>/pokedexcli.git
+   cd pokedexcli
+```
+3. Create a feature branch:
+```bash
+   git checkout -b my-feature
+```
+4. Make your changes and run the tests:
+```bash
+   go test ./...
+```
+5. Commit, push to your fork, and open a pull request against `main` describing what you changed and why.
+
+Bug reports and feature ideas are also welcome via GitHub Issues.
 
 ---
 
